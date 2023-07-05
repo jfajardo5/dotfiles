@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 -- This table will hold the configuration.
 local config = {}
@@ -15,6 +16,13 @@ config.window_decorations = "RESIZE"
 config.font = wezterm.font("ComicShannsMono Nerd Font")
 config.font_size = 14.0
 config.color_scheme = "Catppuccin Mocha"
+config.keys = {
+	-- paste from the clipboard
+	{ key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+
+	-- paste from the primary selection
+	{ key = "V", mods = "CTRL", action = act.PasteFrom("PrimarySelection") },
+}
 
 -- and finally, return the configuration to wezterm
 return config
